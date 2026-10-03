@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>J~Net Invoice #INV-2026-1042</title>
+
+<style>
+/* (c) J~Net 2026 */
+
+@page{
+    size:A4;
+    margin:0;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    background:#eaf6ff;
+    color:#17324d;
+    font-family:Arial,Helvetica,sans-serif;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+}
+
+body{
+    padding:30px;
+}
+
+.invoice{
+    width:210mm;
+    min-height:297mm;
+    margin:0 auto;
+    background:#ffffff;
+    box-shadow:0 15px 45px rgba(0,75,120,.18);
+    overflow:hidden;
+}
+
+/* Header */
+
+.header{
+    position:relative;
+    min-height:145px;
+    padding:34px 42px;
+    background:linear-gradient(135deg,#36bdf2 0%,#168bd0 55%,#1266b0 100%);
+    color:#ffffff;
+    overflow:hidden;
+}
+
+.header:before{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    right:-90px;
+    top:-180px;
+    border-radius:50%;
+    background:rgba(255,255,255,.14);
+}
+
+.header:after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    right:90px;
+    bottom:-145px;
+    border-radius:50%;
+    background:rgba(255,255,255,.10);
+}
+
+.brand{
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.logo{
+    width:58px;
+    height:58px;
+    border-radius:16px;
+    background:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#168bd0;
+    font-size:27px;
+    font-weight:900;
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.company-name{
+    font-size:27px;
+    font-weight:800;
+    letter-spacing:-.7px;
+}
+
+.company-subtitle{
+    margin-top:3px;
+    font-size:12px;
+    opacity:.88;
+}
+
+.invoice-label{
+    position:absolute;
+    z-index:2;
+    right:42px;
+    top:35px;
+    text-align:right;
+}
+
+.invoice-label h1{
+    margin:0;
+    font-size:38px;
+    letter-spacing:2px;
+    font-weight:900;
+}
+
+.invoice-number{
+    margin-top:6px;
+    font-size:13px;
+    opacity:.9;
+}
+
+/* Content */
+
+.content{
+    padding:35px 42px 40px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.info-box{
+    min-height:116px;
+    padding:19px;
+    border:1px solid #d9edf9;
+    border-radius:13px;
+    background:#f7fcff;
+}
+
+.info-box.blue{
+    background:linear-gradient(135deg,#eefaff,#e3f5ff);
+    border-color:#c6e9fa;
+}
+
+.info-title{
+    margin-bottom:11px;
+    color:#168bd0;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.3px;
+    text-transform:uppercase;
+}
+
+.info-name{
+    margin-bottom:6px;
+    color:#123b5c;
+    font-size:15px;
+    font-weight:800;
+}
+
+.info-text{
+    color:#547086;
+    font-size:11px;
+    line-height:1.65;
+}
+
+/* Status */
+
+.status-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:25px;
+    padding:16px 20px;
+    border-radius:12px;
+    background:#f0fbff;
+    border:1px solid #c9ecfa;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:#168052;
+    font-size:12px;
+    font-weight:800;
+}
+
+.status-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#23c77a;
+    box-shadow:0 0 0 5px rgba(35,199,122,.12);
+}
+
+.due-date{
+    color:#526f84;
+    font-size:11px;
+}
+
+.due-date strong{
+    color:#17324d;
+}
+
+/* Invoice table */
+
+.items-table{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    overflow:hidden;
+    border:1px solid #d9eaf4;
+    border-radius:13px;
+}
+
+.items-table thead th{
+    padding:14px 14px;
+    background:#168bd0;
+    color:#ffffff;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:.8px;
+    text-align:left;
+    text-transform:uppercase;
+}
+
+.items-table thead th:first-child{
+    border-top-left-radius:12px;
+}
+
+.items-table thead th:last-child{
+    border-top-right-radius:12px;
+}
+
+.items-table th:nth-child(2),
+.items-table th:nth-child(3),
+.items-table th:nth-child(4),
+.items-table th:nth-child(5),
+.items-table td:nth-child(2),
+.items-table td:nth-child(3),
+.items-table td:nth-child(4),
+.items-table td:nth-child(5){
+    text-align:right;
+}
+
+.items-table tbody tr:nth-child(even){
+    background:#f5fbff;
+}
+
+.items-table tbody tr{
+    break-inside:avoid;
+    page-break-inside:avoid;
+}
+
+.items-table td{
+    padding:15px 14px;
+    border-bottom:1px solid #e5f0f6;
+    color:#3e5d73;
+    font-size:11px;
+}
+
+.items-table tbody tr:last-child td{
+    border-bottom:0;
+}
+
+.product{
+    color:#17324d;
+    font-weight:800;
+}
+
+.description{
+    margin-top:4px;
+    color:#7890a0;
+    font-size:9px;
+    font-weight:400;
+}
+
+/* Discount badge */
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    background:#e7faf2;
+    color:#168052;
+    font-size:9px;
+    font-weight:800;
+}
+
+/* Bottom section */
+
+.bottom{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:28px;
+    margin-top:28px;
+}
+
+.notes{
+    padding:21px;
+    border-radius:13px;
+    background:#f7fcff;
+    border:1px solid #d9edf9;
+}
+
+.notes h3{
+    margin:0 0 10px;
+    color:#168bd0;
+    font-size:12px;
+}
+
+.notes p{
+    margin:0 0 8px;
+    color:#607c8e;
+    font-size:10px;
+    line-height:1.65;
+}
+
+.payment{
+    padding:21px;
+    border-radius:13px;
+    background:linear-gradient(135deg,#effaff,#dff4ff);
+    border:1px solid #c5e9fa;
+}
+
+.payment h3{
+    margin:0 0 13px;
+    color:#168bd0;
+    font-size:12px;
+}
+
+.payment-line{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    color:#557286;
+    font-size:10px;
+}
+
+.payment-line strong{
+    color:#17324d;
+}
+
+/* Totals */
+
+.totals{
+    margin-top:22px;
+    margin-left:auto;
+    width:330px;
+    padding:21px;
+    border-radius:15px;
+    background:#f6fbfe;
+    border:1px solid #d8ebf5;
+}
+
+.total-line{
+    display:flex;
+    justify-content:space-between;
+    padding:7px 0;
+    color:#607b8e;
+    font-size:11px;
+}
+
+.total-line.discount{
+    color:#168052;
+}
+
+.total-line.final{
+    margin-top:10px;
+    padding-top:15px;
+    border-top:2px solid #cce6f3;
+    color:#17324d;
+    font-size:17px;
+    font-weight:900;
+}
+
+.total-line.final span:last-child{
+    color:#168bd0;
+}
+
+/* Footer */
+
+.footer{
+    margin-top:34px;
+    padding:23px 42px;
+    background:#123b5c;
+    color:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.footer-brand{
+    font-size:13px;
+    font-weight:800;
+}
+
+.footer-text{
+    margin-top:4px;
+    color:#a9c8da;
+    font-size:9px;
+}
+
+.footer-contact{
+    color:#d8f1ff;
+    font-size:9px;
+    text-align:right;
+    line-height:1.7;
+}
+
+/* Decorative graphic */
+
+.graphic{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    height:24px;
+    margin-top:18px;
+}
+
+.graphic span{
+    display:block;
+    width:5px;
+    border-radius:5px;
+    background:#36bdf2;
+}
+
+.graphic span:nth-child(1){height:8px;}
+.graphic span:nth-child(2){height:14px;}
+.graphic span:nth-child(3){height:20px;}
+.graphic span:nth-child(4){height:11px;}
+.graphic span:nth-child(5){height:17px;}
+.graphic span:nth-child(6){height:23px;}
+.graphic span:nth-child(7){height:13px;}
+.graphic span:nth-child(8){height:19px;}
+
+/* Print */
+
+@media print{
+    html,
+    body{
+        width:210mm;
+        min-height:297mm;
+        background:#ffffff;
+    }
+
+    body{
+        padding:0;
+    }
+
+    .invoice{
+        width:210mm;
+        min-height:297mm;
+        margin:0;
+        box-shadow:none;
+    }
+
+    .header,
+    .footer,
+    .items-table thead th{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+    .info-box,
+    .notes,
+    .payment,
+    .totals,
+    .status-row{
+        break-inside:avoid;
+        page-break-inside:avoid;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="invoice">
+
+    <header class="header">
+
+        <div class="brand">
+            <div class="logo">J</div>
+
+            <div>
+                <div class="company-name">J~Net Solutions</div>
+                <div class="company-subtitle">
+                    Technology • Software • Digital Services
+                </div>
+            </div>
+        </div>
+
+        <div class="invoice-label">
+            <h1>INVOICE</h1>
+            <div class="invoice-number">#INV-2026-1042</div>
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+        <section class="info-grid">
+
+            <div class="info-box blue">
+                <div class="info-title">From</div>
+
+                <div class="info-name">
+                    J~Net Solutions
+                </div>
+
+                <div class="info-text">
+                    42 Technology Park<br>
+                    Southampton<br>
+                    Hampshire SO15 4AB<br>
+                    United Kingdom
+                </div>
+            </div>
+
+
+            <div class="info-box">
+                <div class="info-title">Bill To</div>
+
+                <div class="info-name">
+                    Acme Digital Ltd
+                </div>
+
+                <div class="info-text">
+                    18 Innovation Street<br>
+                    London<br>
+                    Greater London EC2A 4BX<br>
+                    United Kingdom
+                </div>
+            </div>
+
+
+            <div class="info-box">
+                <div class="info-title">Invoice Details</div>
+
+                <div class="info-text">
+                    <strong>Invoice date:</strong> 03/10/2026<br>
+                    <strong>Payment due:</strong> 17/10/2026<br>
+                    <strong>Payment terms:</strong> 14 days<br>
+                    <strong>Currency:</strong> GBP (£)
+                </div>
+            </div>
+
+        </section>
+
+
+        <div class="status-row">
+
+            <div class="status">
+                <span class="status-dot"></span>
+                PAYMENT STATUS: PENDING
+            </div>
+
+            <div class="due-date">
+                Payment due <strong>17/10/2026</strong>
+            </div>
+
+        </div>
+
+
+        <table class="items-table">
+
+            <thead>
+                <tr>
+                    <th style="width:40%;">Description</th>
+                    <th style="width:13%;">Qty</th>
+                    <th style="width:15%;">Rate</th>
+                    <th style="width:12%;">Tax</th>
+                    <th style="width:20%;">Amount</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>
+                        <div class="product">
+                            Website Development
+                        </div>
+
+                        <div class="description">
+                            Custom responsive website development and implementation
+                        </div>
+                    </td>
+
+                    <td>1</td>
+                    <td>£850.00</td>
+                    <td>20%</td>
+                    <td><strong>£850.00</strong></td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <div class="product">
+                            UI / UX Design
+                        </div>
+
+                        <div class="description">
+                            Interface design, component system and visual styling
+                        </div>
+                    </td>
+
+                    <td>12</td>
+                    <td>£45.00</td>
+                    <td>20%</td>
+                    <td><strong>£540.00</strong></td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <div class="product">
+                            Database Development
+                        </div>
+
+                        <div class="description">
+                            SQL schema design, optimisation and API integration
+                        </div>
+                    </td>
+
+                    <td>8</td>
+                    <td>£55.00</td>
+                    <td>20%</td>
+                    <td><strong>£440.00</strong></td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <div class="product">
+                            Server Configuration
+                        </div>
+
+                        <div class="description">
+                            Linux server deployment, security and service configuration
+                        </div>
+                    </td>
+
+                    <td>1</td>
+                    <td>£275.00</td>
+                    <td>20%</td>
+                    <td><strong>£275.00</strong></td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <div class="product">
+                            Maintenance & Support
+                        </div>
+
+                        <div class="description">
+                            Monthly technical support and maintenance package
+                        </div>
+                    </td>
+
+                    <td>1</td>
+                    <td>£180.00</td>
+                    <td>20%</td>
+                    <td><strong>£180.00</strong></td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <div class="product">
+                            New Customer Discount
+                        </div>
+
+                        <div class="description">
+                            Promotional discount applied to this invoice
+                        </div>
+                    </td>
+
+                    <td>1</td>
+                    <td>-£100.00</td>
+                    <td>—</td>
+                    <td>
+                        <span class="badge">-£100.00</span>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+
+        <div class="bottom">
+
+            <div class="notes">
+
+                <h3>Thank you for your business</h3>
+
+                <p>
+                    We appreciate your business and look forward to
+                    continuing to provide technology and development
+                    services.
+                </p>
+
+                <p>
+                    Please quote invoice number
+                    <strong>#INV-2026-1042</strong>
+                    when making payment.
+                </p>
+
+                <div class="graphic">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+
+            <div class="payment">
+
+                <h3>Payment Information</h3>
+
+                <div class="payment-line">
+                    <span>Bank</span>
+                    <strong>J~Net Bank</strong>
+                </div>
+
+                <div class="payment-line">
+                    <span>Account Name</span>
+                    <strong>J~Net Solutions</strong>
+                </div>
+
+                <div class="payment-line">
+                    <span>Sort Code</span>
+                    <strong>12-34-56</strong>
+                </div>
+
+                <div class="payment-line">
+                    <span>Account</span>
+                    <strong>12345678</strong>
+                </div>
+
+                <div class="payment-line">
+                    <span>Reference</span>
+                    <strong>INV-2026-1042</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="totals">
+
+            <div class="total-line">
+                <span>Subtotal</span>
+                <span>£2,185.00</span>
+            </div>
+
+            <div class="total-line discount">
+                <span>Discount</span>
+                <span>-£100.00</span>
+            </div>
+
+            <div class="total-line">
+                <span>Net Total</span>
+                <span>£2,085.00</span>
+            </div>
+
+            <div class="total-line">
+                <span>VAT (20%)</span>
+                <span>£417.00</span>
+            </div>
+
+            <div class="total-line final">
+                <span>Total Due</span>
+                <span>£2,502.00</span>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div>
+            <div class="footer-brand">
+                J~Net Solutions
+            </div>
+
+            <div class="footer-text">
+                Professional technology services
+            </div>
+        </div>
+
+        <div class="footer-contact">
+            hello@jnet.example<br>
+            www.jnet.example
+        </div>
+
+    </footer>
+
+</div>
+
+</body>
+</html>
