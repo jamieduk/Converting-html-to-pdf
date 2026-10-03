@@ -3,6 +3,7 @@
 A lightweight Linux command-line script for converting HTML files to PDF using **Chromium, Google Chrome or Brave**.
 
 The conversion is performed using a real Chromium-based browser engine, helping preserve the original HTML appearance including:
+<img width="661" height="890" alt="Screenshot from 2026-10-03 07-32-05" src="https://github.com/user-attachments/assets/23ec90a0-c045-4299-af7f-7a43b5dd460b" />
 
 * CSS styling
 * Tables
