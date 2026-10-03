@@ -3,18 +3,20 @@
 # jnetai.com
 # https://github.com/jamieduk/Converting-html-to-pdf
 #
-# ./convert-html-to-pdf.sh filename
-#
 #
 set -e
 
-# Usage: ./convert-html-to-pdf.sh input.html
+# Usage: ./convert-html-to-pdf.sh invoice-test.html
 
 INPUT="$1"
 
 if [ -z "$INPUT" ]; then
-    echo "Usage: $0 input.html"
-    exit 1
+    echo -n "Filename of html to convert (Example invoice-test.html): "
+    read INPUT
+
+    if [ -z "$INPUT" ]; then
+        INPUT="invoice-test.html"
+    fi
 fi
 
 if [ ! -f "$INPUT" ]; then
