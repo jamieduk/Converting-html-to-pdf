@@ -1,7 +1,8 @@
 #!/bin/bash
 # (c) J~Net 2026
 # jnetai.com
-# 
+# https://github.com/jamieduk/Converting-html-to-pdf
+#
 # ./convert-html-to-pdf.sh filename
 #
 #
