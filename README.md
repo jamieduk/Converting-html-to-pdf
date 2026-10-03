@@ -225,13 +225,13 @@ The PDF is created in the same directory as the input HTML file.
 For example:
 
 ```text
-/home/jay/Documents/invoice.html
+/home/USERNAME/Documents/invoice.html
 ```
 
 becomes:
 
 ```text
-/home/jay/Documents/invoice.pdf
+/home/USERNAME/Documents/invoice.pdf
 ```
 
 The script resolves both paths to absolute paths before starting the browser.
